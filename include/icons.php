@@ -1,0 +1,10 @@
+<!--<a href="https://twitter.com/tstohome" style="height: 46;" class="w3-padding-large w3-hover-red w3-hide-small w3-right"><i class="fab fa-twitter w3-hover-opacity"></i></a>-->
+<!--<a href="https://www.facebook.com/tstohome" style="height: 46;" class="w3-padding-large w3-hover-red w3-hide-small w3-right"><i class="fab fa-facebook w3-hover-opacity"></i></a>-->
+<!--<a href="https://www.youtube.com/@TSTOHome" style="height: 46;" class="w3-padding-large w3-hover-red w3-hide-small w3-right"><i class="fab fa-youtube w3-hover-opacity"></i></a>-->
+<!--<a href="https://discord.gg/9sYXqGfyAC" style="height: 46;" class="w3-padding-large w3-hover-red w3-hide-small w3-right"><i class="fab fa-discord w3-hover-opacity"></i></a>-->
+<!--<a href="https://patreon.com/tstohome" style="height: 46;" class="w3-padding-large w3-hover-red w3-hide-small w3-right"><i class="fab fa-patreon w3-hover-opacity"></i></a>-->
+<a href="https://twitter.com/tstohome" style="height: 46; padding-top:16px; margin-right:16px" class="w3-hover-red w3-hide-small w3-right"><i class="fab fa-twitter w3-hover-opacity"></i></a>
+<a href="https://www.facebook.com/tstohome" style="height: 46; padding-top:16px; margin-right:16px" class="w3-hover-red w3-hide-small w3-right"><i class="fab fa-facebook w3-hover-opacity"></i></a>
+<a href="https://www.youtube.com/@TSTOHome" style="height: 46; padding-top:16px; margin-right:16px" class="w3-hover-red w3-hide-small w3-right"><i class="fab fa-youtube w3-hover-opacity"></i></a>
+<a href="https://discord.gg/9sYXqGfyAC" style="height: 46; padding-top:16px; margin-right:16px" class="w3-hover-red w3-hide-small w3-right"><i class="fab fa-discord w3-hover-opacity"></i></a>
+<a href="https://patreon.com/tstohome" style="height: 46; padding-top:16px; margin-right:16px" class="w3-hover-red w3-hide-small w3-right"><i class="fab fa-patreon w3-hover-opacity"></i></a>
