@@ -40,7 +40,7 @@ function sendMail($to, $subject, $msg){
         //Content
         $mail->Subject = $subject;
         // sendMail($row['email'], $row['name'], $msg);
-        $mail->addAddress('test-zsg5y2bfa@srv1.mail-tester.com');
+        $mail->addAddress($to);
         $mail->Body    = $msg;
         $mail->isHTML(true);                                  //Set email format to HTML
         $mail->send();
