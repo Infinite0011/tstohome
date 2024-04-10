@@ -10,7 +10,7 @@ function attention()
 	return
 "<div class='w3-container w3-hide-small attentino-form'>
 	<div class='flex-container translate'>
-		<span class='text-green'> Attention:</span> Please sign up and subscribe to see our services and content files. It is a monthly subscription that lasts 30 days and autorenews unless you cancel on your end. By purchasing a subscription you will recieve our services which include media content and files from TSTO Home. Also by purchasing a subscription you agree to the our set  <span class='text-green'>Terms of Service</span>. Happy Tapping!
+		<span class='text-green'> Attention:</span> Please sign up and subscribe to see our services and content files. It is a monthly subscription that lasts 30 days and autorenews unless you cancel on your end. By purchasing a subscription you will recieve our services which include media content and files from TSTO Home. Also by purchasing a subscription you agree to the our set  <span class='text-green'><a href='terms.php'>Terms of Service</a></span>. Happy Tapping!
 	</div>
 </div>";
 }
@@ -30,7 +30,7 @@ function attentionTerms()
 	return
 "<div class='w3-container w3-hide-small attentino-form'>
 	<div class='flex-container translate'>
-    By not following our Discord Rules and / or our Website Terms of Service will lead either to a warning and / or a ban from TSTO Home website and our Discord server. This will also lead to your subscription being cancelled and not refunded.
+    By not following our Discord Rules and / or our Website <a href='terms.php'>Terms of Service</a> will lead either to a warning and / or a ban from TSTO Home website and our Discord server. This will also lead to your subscription being cancelled and not refunded.
 	</div>
 </div>";
 }
@@ -228,20 +228,27 @@ if (!isset($_SESSION["logintry"])) {
       <?php
       if (isset($_SESSION['status']) && $_SESSION['status'] == "loggedin") {
       ?>
-
-        <a href="?destroy=1" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Log out</a>
+        <div class="menu">
+          <button class="dropdown-button" style="padding-top: 12px;">Setting</button>
+          <div class="dropdown-content">
+            <a href="edit.php">Edit user</a>
+            <a href="?destroy=1">Log out</a>
+          </div>
+        </div>
+        
       <?php
       } else {
       ?>
         <a href="login.php<?=forLink();?>" class="w3-bar-item w3-button w3-padding-large">Login</a>
         <a href="signUp.php<?=forLink();?>" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Sign Up</a>
         <a href="<?=$linkAbout;?>" class="w3-bar-item w3-button w3-padding-large w3-hide-small about-link"><?= $nameAbout; ?></a>
+        <a href="terms.php" class="w3-bar-item w3-button w3-padding-large w3-hide-small about-link">Terms of Service</a>
         <?php
       }
 
       //if ($uri = "/index.php") {
 
-        if (isset($_SESSION['status']) &&  strtotime(date('Y-m-d', strtotime($_SESSION['subscriptionDate']))) < strtotime(date('Y-m-d'))) {
+        if (isset($_SESSION['status']) && strtotime(date('Y-m-d', strtotime($_SESSION['subscriptionDate']))) < strtotime(date('Y-m-d'))) {
         ?>
           <form action="https://www.paypal.com/cgi-bin/webscr" id="paypal-form1" method="post">
             <!-- Identify your business so that you can collect the payments -->
@@ -281,6 +288,7 @@ if (!isset($_SESSION["logintry"])) {
                 <a href="noxplayer.php">Nox Player</a>
                 <a href="faq.php<?=forLink();?>">FAQ</a>
                 <a href="<?=$linkAbout;?>"><?= $nameAbout; ?></a>
+                <a href="terms.php">Terms of Service</a>
               </div>
             </div>
           <!--<a href="<?=$linkAbout;?>" class="w3-bar-item w3-button w3-padding-large w3-hide-small about-link"><?= $nameAbout; ?></a>-->
@@ -305,7 +313,11 @@ if (!isset($_SESSION["logintry"])) {
               <a href="noxplayer.php">Nox Player</a>
               <a href="faq.php<?=forLink();?>">FAQ</a>
               <a href="<?=$linkAbout;?>"><?= $nameAbout; ?></a>
-              <a href="terms.php">Terms of Service</a>
+              <?php 
+                if (!(($_SESSION['id']==='46') || ($_SESSION['id']==='895') || ($_SESSION['id']==='2490'))) {
+              ?>
+                <a href="terms.php">Terms of Service</a>
+              <?php } ?>
             </div>
           </div>
         <?php } else { ?>
@@ -318,8 +330,8 @@ if (!isset($_SESSION["logintry"])) {
           <!-- <a href="faq.php<?=forLink();?>" class="w3-bar-item w3-button w3-padding-large w3-hide-small">FAQ</a> 
           <a href="<?=$linkAbout;?>" class="w3-bar-item w3-button w3-padding-large w3-hide-small about-link"><?= $nameAbout; ?></a> -->
           <?php
-        if (($_SESSION['id']==='46') || ($_SESSION['id']==='895') || ($_SESSION['id']==='2490') ) {?>
-        <? if ($_GET['Lang']) {} ?>
+        if (($_SESSION['id']==='46') || ($_SESSION['id']==='895') || ($_SESSION['id']==='2490')) {?>
+        <? if (isset($_GET['Lang']) && $_GET['Lang']) {} ?>
           <div class="menu">
             <button class="dropdown-button" style="padding-top: 12px;">Admin</button>
             <div class="dropdown-content">
@@ -327,6 +339,7 @@ if (!isset($_SESSION["logintry"])) {
               <a href="subscribers.php<?=forLink();?>">Subscribers</a>
             </div>
           </div>
+          <a href="terms.php" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Terms of Service</a>
         <!--<a href="show-users-with-ip.php<?=forLink();?>" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Users</a> -->
         <!--<a href="show-current-subscribers.php<?=forLink();?>" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Subscribers</a>        -->
         <?php

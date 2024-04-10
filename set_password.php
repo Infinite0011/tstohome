@@ -22,8 +22,13 @@ if (isset($_POST['submit-email']) && isset($_POST['email'])) {
     $subject = "Password change request tstohome.com";
 
     $message = "
-	<p>We have recieved your request to reset your password for tstohome.com account, please click the link below or paste it in a browser.<br><br> $link
-	</p>";
+      <html>
+      <head></head>
+      <body>
+        <p>We have recieved your request to reset your password for tstohome.com account, please click the link below or paste it in a browser.</p>
+        <p>$link</p>
+      </body>
+      </html>";
 
     // Always set content-type when sending HTML email
     $headers = "MIME-Version: 1.0" . "\r\n";

@@ -3,9 +3,8 @@ if (session_status() == PHP_SESSION_NONE) {
   session_start();
 }
 
-if (isset($_SESSION['status']) && $_SESSION['status'] == "loggedin") {
-  include "include/currentuser.php";
-    header("Location: index.php");
+if (!isset($_SESSION['status']) || $_SESSION['status'] != "loggedin") {
+  header("Location: index.php");
 }
 
 if ($_POST["email"]) {
@@ -14,20 +13,16 @@ if ($_POST["email"]) {
   $lname = ($_POST["lname"]);
   $email = ($_POST["email"]);
   $discord = ($_POST["discord"]);
-  $password1 = ($_POST["password1"]);
+  $userId = $_SESSION['id'];
   $user_ip = $_SERVER['REMOTE_ADDR'];
   $regDate = date('Y-m-d H:i:s');
   $d = mktime(11, 14, 54, 4, 1, 2022);
   $subdate = date('Y-m-d H:i:s', $d);
-  $passwordhash = password_hash($password1, PASSWORD_DEFAULT);
-  // $sql = 'SELECT * FROM users WHERE email= @0 AND password=@1';
-  $query = "INSERT INTO users (firstname, lastName, email, discordName, ip, registrationDate, subscriptionDate, passwordhash) Values('$fname', '$lname', '$email', '$discord', '$user_ip', '$regDate', '$subdate', '$passwordhash')";
 
+  $query = "update users set firstname='".$fname."',lastName='".$lname."',email='".$email."',discordName='".$discord."' where id=$userId";
   if ($connection->query($query)) {
-    echo "Query";
-    $_SESSION['status'] = "loggedin";
     $_SESSION['email'] = $email;
-    echo "<script>alert('Registration Complete! Please buy subscription to view mod files below!');window.location.href='index.php';</script>";
+    include "include/currentuser.php";
   } else {
     // echo "error";
     // exit;
@@ -40,25 +35,21 @@ if ($_POST["email"]) {
 include "include/header.php"; ?>
 <div class="w3-display-centre flex-container w3-text-white w3-padding-32 w3-hide-small form-auth2">
 
-  <form name="signUp" action="signUp.php" method="post">
+  <form name="edit" action="edit.php" method="post">
 
     <div class="form-row">
 
-      <div class="form-group col-md-4">
+      <div class="form-group col-md-6">
 
-        <input name="fname" type="text" class="form-control" placeholder="First Name" pattern="[A-Za-z]{2,}" title="Name can only be 10 characters and can not contain numbers" required>
-
-      </div>
-
-      <div class="form-group col-md-4">
-
-        <input name="lname" type="text" class="form-control" placeholder="Last Name" pattern="[A-Za-z]{2,}" title="Name can only be 10 characters and can not contain numbers" required>
+        <label>First Name:</label>
+        <input name="fname" type="text" class="form-control" placeholder="First Name" pattern="[A-Za-z]{2,}" title="Name can only be 10 characters and can not contain numbers" required value="<?php echo $_SESSION['name'] ?>">
 
       </div>
 
-      <div class="form-group col-md-4">
+      <div class="form-group col-md-6">
 
-        <input name="email" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Email Address" required>
+        <label>Last Name:</label>
+        <input name="lname" type="text" class="form-control" placeholder="Last Name" pattern="[A-Za-z]{2,}" title="Name can only be 10 characters and can not contain numbers" required value="<?php echo $_SESSION['lastName'] ?>">
 
       </div>
 
@@ -66,23 +57,17 @@ include "include/header.php"; ?>
 
     <div class="form-row">
 
-      <div class="form-group col-md-4">
+      <div class="form-group col-md-6">
 
-        <input name="discord" type="text" class="form-control" placeholder="Discord Name" title="Enter Nickname if you don't have Discord" required>
-
-      </div>
-
-      <div class="form-group col-md-4">
-
-        <input id="password1" name="password1" type="password" class="form-control" placeholder="Password" pattern=".{6,}" title="Six or more characters" required>
+        <label>Email:</label>
+        <input name="email" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Email Address" required value="<?php echo $_SESSION['email'] ?>">
 
       </div>
 
-      <div class="form-group col-md-4">
+      <div class="form-group col-md-6">
 
-        <input id="password2" type="password" class="form-control" placeholder="Confirm Password" required>
-
-        <div id="msg"></div>
+        <label>Discord Name:</label>
+        <input name="discord" type="text" class="form-control" placeholder="Discord Name" title="Enter Nickname if you don't have Discord" required value="<?php echo $_SESSION['discordName'] ?>">
 
       </div>
 
@@ -90,7 +75,7 @@ include "include/header.php"; ?>
 
     <div style="text-align:center">
 
-      <input type="submit" id="submit" name="submit" class="btn btn-success" value="Sign Up">
+      <input type="submit" id="submit" name="submit" class="btn btn-success" value="Save">
 
     </div>
 
@@ -206,24 +191,3 @@ if (isset($_SESSION['status']) && $_SESSION['status'] == "loggedin" && strtotime
 
 <? include "include/footer.php"; ?>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-<script type="text/javascript">
-  $('#password1, #password2').on('keyup', function() {
-
-    if ($('#password1').val() == $('#password2').val()) {
-
-      $('#msg').html('Passwords Match!').css('color', 'green');
-
-      $("#submit").prop('disabled', false);
-
-      return true;
-
-    } else
-
-      $('#msg').html('Passwords do not match!').css('color', 'red');
-
-    $("#submit").prop('disabled', true);
-
-    return false;
-
-  });
-</script>

@@ -21,29 +21,29 @@ function sendMail($to, $subject, $msg){
     //print_r($smtp_config); return;
     
     //Create an instance; passing `true` enables exceptions
-    $mail = new PHPMailer(false);
+    $mail = new PHPMailer(true);
     try {
         //Server settings
         $mail->isSMTP();
-        $mail->SMTPAutoTLS = false;                                            //Send using SMTP
-        $mail->SMTPDebug  = false;                     //Enable verbose debug output
+        $mail->SMTPAutoTLS = true;                                            //Send using SMTP
+        $mail->SMTPDebug  = true;                     //Enable verbose debug output
         $mail->Host       = $smtp_config['host'];                   //Set the SMTP server to send through
         $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
         $mail->Username   = $smtp_config['username'];               //SMTP username
         $mail->Password   = $smtp_config['password'];               //SMTP password
         $mail->SMTPSecure = $smtp_config['secure'];                 //Enable verbose debug output
-        $mail->Port       = 25;                   //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+        $mail->Port       = 587;                   //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
     
         //Recipients
         $mail->setFrom("admin@tstohome.com", "tstohome-notice");
     
         //Content
-        $mail->isHTML(true);                                  //Set email format to HTML
         $mail->Subject = $subject;
         // sendMail($row['email'], $row['name'], $msg);
-        $mail->AddAddress($to, '');
+        $mail->addAddress('test-zsg5y2bfa@srv1.mail-tester.com');
         $mail->Body    = $msg;
-        $mail->Send();
+        $mail->isHTML(true);                                  //Set email format to HTML
+        $mail->send();
     
         // Reset pengaturan email untuk penerima berikutnya
         $mail->clearAddresses();
