@@ -199,6 +199,7 @@ if (isset($_SESSION['status']) && $_SESSION['status'] == "loggedin") {
         </div>
         </br></br>
       </div>
+      <div style="padding-bottom: 30px"><?=attention(); ?></div>
     </div>
   <?php } else {
   ?>

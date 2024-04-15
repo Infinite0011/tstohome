@@ -1,5 +1,5 @@
 <?php ini_set('display_errors', 1);
-require_once("./library/phpmailer/send-mail.php");
+require_once("./library/send-mail.php");
 include "include/config.php";
 
 
@@ -22,8 +22,7 @@ if (isset($_POST['submit-email']) && isset($_POST['email'])) {
     $subject = "Password change request tstohome.com";
 
     $message = "
-      <html>
-      <head></head>
+      <!DOCTYPE html>
       <body>
         <p>We have recieved your request to reset your password for tstohome.com account, please click the link below or paste it in a browser.</p>
         <p>$link</p>

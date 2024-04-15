@@ -25,7 +25,7 @@ function sendMail($to, $subject, $msg){
     try {
         //Server settings
         $mail->isSMTP();
-        $mail->SMTPAutoTLS = true;                                            //Send using SMTP
+        // $mail->SMTPAutoTLS = true;                                            //Send using SMTP
         $mail->SMTPDebug  = true;                     //Enable verbose debug output
         $mail->Host       = $smtp_config['host'];                   //Set the SMTP server to send through
         $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
@@ -44,7 +44,7 @@ function sendMail($to, $subject, $msg){
         $mail->Body    = $msg;
         $mail->isHTML(true);                                  //Set email format to HTML
         $mail->send();
-    
+
         // Reset pengaturan email untuk penerima berikutnya
         $mail->clearAddresses();
         sleep(1); // Tambahkan jeda untuk menghindari pembatasan pengiriman email
